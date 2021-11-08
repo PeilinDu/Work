@@ -1,0 +1,46 @@
+import csv
+import datetime
+import ijson
+import os
+
+def jR(line,name):    
+    a = list(ijson.items(line, name))
+    return a
+
+header = ['id',
+          'user.id',  
+          'text',
+          'in_reply_to_user_id',
+          'created_at', 
+          'place.country_code',
+          'coordinates.coordinates',
+          'user.screen_name' ,
+          'user.name',
+          'user.verified',
+          'user.followers_count',
+          'user.favourites_count', 
+          'user.listed_count',
+          'user.statuses_count',
+          'user.created_at',
+          'user.default_profile', 
+          'user.default_profile_image'
+             ]
+
+tmp1 = {}
+Num=0
+st = datetime.datetime.now()
+tweet_csv = '/Users/dupeilin/Desktop/Jupyter Notebook/ECMM443/Course Work/twitter.csv'
+with open(tweet_csv, 'w') as c:
+    writer = csv.writer(c)
+    writer.writerow(header)
+    for root,dirs,files in os.walk('/Users/dupeilin/Desktop/Jupyter Notebook/ECMM443/Course Work/TwitterJune2021'):
+        if(str(files)[2:-2]!='.DS_Store' and '.json'in str(files)[2:-2] ):
+            a = os.path.join(root,str(files)[2:-2])
+            with open(a, 'r') as b:             
+                    for line in b:
+                        for i in range(len(header)):
+                            tmp1[i]=jR(line,header[i])
+#                            print(tmp1[i] for i in range(len(tmp1)))
+                        writer.writerow(tmp1[i] for i in range(len(tmp1))) 
+ed = datetime.datetime.now()
+print('Runtime = ', ed - st)

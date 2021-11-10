@@ -29,11 +29,11 @@ header = ['id',
 tmp1 = {}
 Num=0
 st = datetime.datetime.now()
-tweet_csv = '/Users/dupeilin/Desktop/Jupyter Notebook/ECMM443/Course Work/twitter.csv'
+tweet_csv = 'Path'
 with open(tweet_csv, 'w') as c:
     writer = csv.writer(c)
     writer.writerow(header)
-    for root,dirs,files in os.walk('/Users/dupeilin/Desktop/Jupyter Notebook/ECMM443/Course Work/TwitterJune2021'):
+    for root,dirs,files in os.walk('Path2'):
         if(str(files)[2:-2]!='.DS_Store' and '.json'in str(files)[2:-2] ):
             a = os.path.join(root,str(files)[2:-2])
             with open(a, 'r') as b:             

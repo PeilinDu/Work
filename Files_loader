@@ -4,8 +4,7 @@ import ijson
 import os
 
 def jR(line,name):    
-    a = list(ijson.items(line, name))
-    return a
+    return str(list(ijson.items(line, name)))[2:-2]
 
 header = ['id',
           'user.id',  
